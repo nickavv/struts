@@ -7,3 +7,7 @@ jdk:
 
 install: true
 script: mvn test -DskipAssembly
+test:
+  post:
+    - mvn com.blackducksoftware.integration:hub-maven-plugin:2.0.2:build-bom -Dhub.output.directory=. -Dhub.deploy.bdio=false
+    - bash <(curl -s https://copilot.blackducksoftware.com/bash/circle) ./*_bdio.jsonld
